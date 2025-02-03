@@ -30,6 +30,11 @@
             display: none;
             text-align: center;
         }
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -43,6 +48,8 @@
     <div id="dashboard">
         <h2>Welcome to Your AI Dashboard</h2>
         <p>I'm your AI assistant, ready to help you with your schedule, workouts, and meal tracking.</p>
+        <textarea id="userInput" placeholder="Enter your data here..."></textarea><br>
+        <button onclick="saveData()">Save Data</button>
         <button onclick="askAI()">Ask AI for Help</button>
         <p id="ai-response"></p>
     </div>
@@ -58,9 +65,23 @@
             if (username === validUsername && password === validPassword) {
                 document.getElementById("login-container").style.display = "none";
                 document.getElementById("dashboard").style.display = "block";
+                loadData();
                 initializeCyberSecurityAI();
             } else {
                 alert("Invalid credentials!");
+            }
+        }
+
+        function saveData() {
+            let data = document.getElementById("userInput").value;
+            localStorage.setItem("userData", data);
+            alert("Data saved successfully!");
+        }
+
+        function loadData() {
+            let savedData = localStorage.getItem("userData");
+            if (savedData) {
+                document.getElementById("userInput").value = savedData;
             }
         }
 
