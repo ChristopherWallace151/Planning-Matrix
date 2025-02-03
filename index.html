@@ -17,9 +17,11 @@
         #login-container {
             text-align: center;
         }
-        input {
+        input, textarea {
             padding: 10px;
             margin: 5px;
+            width: 300px;
+            display: block;
         }
         button {
             padding: 10px;
@@ -29,11 +31,6 @@
         #dashboard {
             display: none;
             text-align: center;
-        }
-        textarea {
-            width: 300px;
-            height: 100px;
-            margin-top: 10px;
         }
     </style>
 </head>
@@ -48,7 +45,9 @@
     <div id="dashboard">
         <h2>Welcome to Your AI Dashboard</h2>
         <p>I'm your AI assistant, ready to help you with your schedule, workouts, and meal tracking.</p>
-        <textarea id="userInput" placeholder="Enter your data here..."></textarea><br>
+        <input type="text" id="mealInput" placeholder="Enter your meal details...">
+        <input type="text" id="workoutInput" placeholder="Enter your workout details...">
+        <input type="text" id="scheduleInput" placeholder="Enter your schedule details...">
         <button onclick="saveData()">Save Data</button>
         <button onclick="askAI()">Ask AI for Help</button>
         <p id="ai-response"></p>
@@ -73,15 +72,26 @@
         }
 
         function saveData() {
-            let data = document.getElementById("userInput").value;
-            localStorage.setItem("userData", data);
+            let mealData = document.getElementById("mealInput").value;
+            let workoutData = document.getElementById("workoutInput").value;
+            let scheduleData = document.getElementById("scheduleInput").value;
+            
+            let userData = {
+                meal: mealData,
+                workout: workoutData,
+                schedule: scheduleData
+            };
+            
+            localStorage.setItem("userData", JSON.stringify(userData));
             alert("Data saved successfully!");
         }
 
         function loadData() {
-            let savedData = localStorage.getItem("userData");
+            let savedData = JSON.parse(localStorage.getItem("userData"));
             if (savedData) {
-                document.getElementById("userInput").value = savedData;
+                document.getElementById("mealInput").value = savedData.meal;
+                document.getElementById("workoutInput").value = savedData.workout;
+                document.getElementById("scheduleInput").value = savedData.schedule;
             }
         }
 
