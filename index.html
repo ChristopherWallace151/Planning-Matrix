@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure AI Dashboard</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #login-container {
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #dashboard {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="dashboard">
+        <h2>Welcome to Your AI Dashboard</h2>
+        <p>I'm your AI assistant, ready to help you with your schedule, workouts, and meal tracking.</p>
+        <button onclick="askAI()">Ask AI for Help</button>
+        <p id="ai-response"></p>
+    </div>
+
+    <script>
+        const validUsername = "Christopher Wallace";
+        const validPassword = "Jdl14fY2!";
+
+        function login() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (username === validUsername && password === validPassword) {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+                initializeCyberSecurityAI();
+            } else {
+                alert("Invalid credentials!");
+            }
+        }
+
+        function askAI() {
+            let responses = [
+                "Let's plan your meal for today!",
+                "Time to schedule your workout session!",
+                "Let's optimize your sleep cycle for maximum productivity.",
+                "Need help managing your workload? I got you!",
+                "Scanning website security... No threats detected!",
+                "Updating firewall rules to enhance protection.",
+                "Analyzing potential vulnerabilities in the system."
+            ];
+            document.getElementById("ai-response").innerText = responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function initializeCyberSecurityAI() {
+            console.log("AI Cybersecurity System Initialized");
+            setInterval(() => {
+                console.log("Running security scan...");
+                document.getElementById("ai-response").innerText = "Running security check... No threats detected!";
+            }, 30000); // Runs security check every 30 seconds
+        }
+    </script>
+</body>
+</html>
